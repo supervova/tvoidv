@@ -50,6 +50,7 @@
   },
   {
     key: 1,
+    name: 'residence',
     text: 'Вы&nbsp;проживаете в&nbsp;Дальневосточном федеральном округе России?',
     answers: [
       { text: 'Да, проживаю здесь всю сознательную жизнь, чему несказанно рад', value: 'FE' },
@@ -61,6 +62,7 @@
   },
   {
     key: 2,
+    name: 'family',
     text: 'Российское государство активно поддерживает молодые семьи. А&nbsp;как обстоят дела на&nbsp;личном фронте у&nbsp;вас?',
     answers: [
       { text: 'Есть супруг(а) и&nbsp;дети', value: 'family' },
@@ -71,6 +73,7 @@
   },
   {
     key: 3,
+    name: 'age',
     text: 'Уверены, что возраст счастью не&nbsp;помеха. Но&nbsp;всё-таки хотим спросить: вам уже исполнилось 36&nbsp;лет?',
     answers: [
       { text: 'Ещё не&nbsp;исполнилось ни&nbsp;мне, ни&nbsp;супругу(е). Вся жизнь впереди', value: 'lth 36' },
@@ -80,6 +83,7 @@
   },
   {
     key: 4,
+    name: 'house',
     text: 'Какое жильё вы&nbsp;бы хотели приобрести?',
     answers: [
       { text: 'Хочу квартиру в&nbsp;новостройке и&nbsp;непременно в&nbsp;городе', value: 'apt' },
@@ -89,6 +93,7 @@
   },
   {
     key: 5,
+    name: 'mood',
     text: 'Как настроение? Не&nbsp;устали отвечать на&nbsp;вопросы?',
     answers: [
       { text: 'Если&nbsp;бы мне одобрили ипотеку под&nbsp;2%, было&nbsp;бы великолепным', value: 0 },
@@ -97,6 +102,7 @@
   },
   {
     key: 6,
+    name: 'ha',
     text: 'На&nbsp;Дальнем Востоке по&nbsp;инициативе Президента России действует проект «Дальневосточный гектар». Слышали о&nbsp;нём что-то?',
     answers: [
       { text: 'Конечно, слышал. Уже оформляю!', value: 'ha' },
@@ -106,6 +112,7 @@
   },
   {
     key: 7,
+    name: 'ha-using',
     text: 'Если вы&nbsp;всё-таки решили принять участие в&nbsp;программе «Дальневосточный гектар», поделитесь с&nbsp;нами радостью, чем планируете там заниматься?',
     isLast: true,
     answers: [
@@ -121,13 +128,10 @@
 {% block html_head %}
   {{ parent() }}
 
-  <link rel="stylesheet" href="css/01.css">
-
-  {# <style>
-    body:hover { background: transparent url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2224%22%20viewBox%3D%220%200%208%2024%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20width%3D%228%22%20height%3D%221%22%20y%3D%2223%22%20fill%3D%22%23000%22%20fill-opacity%3D%22.24%22%2F%3E%3Crect%20width%3D%228%22%20height%3D%221%22%20y%3D%2215%22%20fill%3D%22%23F0F%22%20fill-opacity%3D%22.12%22%2F%3E%3Crect%20width%3D%228%22%20height%3D%221%22%20y%3D%227%22%20fill%3D%22%23F0F%22%20fill-opacity%3D%22.12%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E') repeat; }
-    h1, h2 { background: hsla(240, 100%, 50%, .24); }
-    .btn { opacity: .6; }
-  </style> #}
+  {# <link rel="stylesheet" href="css/01.css"> #}
+  <style>
+    body{--background-image:url('../img/quiz-01/bg.jpg')}@media (min-width:768px){.quiz__section{--min-height:55.2rem}}@media (min-width:992px){.quiz__section{--min-height:62.4rem}}.page.has-open-slide-0 .picture.is-main .img{--background-image:url('../img/quiz-01/00.jpg')}.page.has-open-slide-1 .picture.is-main .img{--background-image:url('../img/quiz-01/01.jpg')}.page.has-open-slide-2 .picture.is-main .img{--background-image:url('../img/quiz-01/02.jpg')}.page.has-open-slide-3 .picture.is-main .img{--background-image:url('../img/quiz-01/03.jpg')}.page.has-open-slide-4 .picture.is-main .img{--background-image:url('../img/quiz-01/04.jpg')}.page.has-open-slide-5 .picture.is-main .img{--background-image:url('../img/quiz-01/05.jpg')}.page.has-open-slide-6 .picture.is-main .img{--background-image:url('../img/quiz-01/06.jpg')}.page.has-open-slide-7 .picture.is-main .img{--background-image:url('../img/quiz-01/07.jpg')}.page.has-open-slide-last .picture.is-main .img{--background-image:url('../img/quiz-01/last.jpg')}
+  </style>
 {% endblock %}
 
 {# MAIN CONTENT ------------------------------------------------------------- #}
@@ -170,13 +174,13 @@
               </h2>
               {% for answer in question.answers %}
                 <label class="quiz__answer {% if question.isLast %} is-last{% endif %}">
-                  <input name="q-{{ question.key }}" type="radio" value="{{ answer.value }}">
+                  <input name="{{ question.name }}" type="radio" value="{{ answer.value }}">
                   <span aria-hidden="true"></span>
                   {{ answer.text }}
                 </label>
               {% endfor %}
               {% if question.key > 0 %}
-                <a class="carousel__prev" href="#quiz" role="button" data-slide="prev">Назад</a>
+                <a class="carousel__back" href="#quiz" role="button" data-slide="prev">Назад</a>
               {% endif %}
             </div>
           </section>
@@ -193,7 +197,7 @@
             <div id="results"></div>
 
             <aside class="social-tools">
-              <h3>Поделиться результатами</h3>
+              <h3>Поделиться результатами:</h3>
               <a class="social-tools__btn is-fb" href="https://www.facebook.com/share.php?u={{ post.link | url_encode }}&amp;title={{ post.title | url_encode }}" aria-label="Поделиться результатами в Фейсбуке">
                 <svg class="icon" aria-hidden="true" focusable="false">
                   <use xlink:href="img/base/graphics/sprite.svg#icon-fb"></use>
@@ -210,6 +214,9 @@
                 </svg>
               </a>
             </aside>
+
+            <a class="carousel__back is-to-start" href="#quiz" role="button" data-slide-to="0">Попробовать ещё раз</a>
+
           </div>
         </section>
       </div>

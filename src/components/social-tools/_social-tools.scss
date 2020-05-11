@@ -1,0 +1,55 @@
+$color-facebook:                        rgb(24, 119, 242);
+$color-twitter:                         #1da1f2;
+$color-vkontakte:                       #45668e;
+
+
+// Container
+.social-tools {
+  padding-bottom: $size-2 + .4rem;
+}
+
+
+// Title
+.social-tools > h3 {
+  margin-bottom: $size-1 + .2rem;
+}
+
+// Buttons
+.social-tools__btn {
+  border-radius: $border-radius;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color $duration-sm;
+  user-select: none;
+  vertical-align: middle;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:focus {
+    box-shadow: $box-shadow-focus-outline;
+  }
+}
+
+.social-tools__btn + .social-tools__btn {
+  margin-left: $size-1;
+}
+
+.social-tools__btn.is-fb {
+  background-color: $color-facebook;
+}
+
+.social-tools__btn.is-tw {
+  background-color: $color-twitter;
+}
+
+.social-tools__btn.is-vk {
+  background-color: $color-vkontakte;
+}
+
+// Icon
+.social-tools__btn .icon {
+  fill: $color-ink-inverse-normal;
+}

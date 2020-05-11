@@ -59,7 +59,7 @@ $carousel-prev-next-chevron:            url('data:image/svg+xml;charset=UTF-8,%3
   z-index: 0;
 }
 
-.carousel__prev {
+.carousel__back {
   background: rgba(0, 0, 0, 0) $carousel-prev-next-chevron no-repeat 0 calc(50% + .5rem);
   display: block;
   padding-top: $size-1 + .2rem;

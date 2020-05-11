@@ -107,7 +107,7 @@ const settings = {
         /\w\.in/, /\.navbar(-[a-zA-Z]+)?/, /\.modal(-[a-zA-Z]+)?/, /\.dropdown(-[a-zA-Z]+)?/, /\.carousel(-[a-zA-Z]+)?/, /\.open/, /\.fade/, /\.collaps((-[a-zA-Z])+)?/,
 
         // Custom
-        /\.page.has-open-slide(-[a-zA-Z]+)?/, /\.hlaquo-h1/, /\.slaquo-h1/, /\.vk/, /iframe/, /\.mb(-[a-zA-Z0-9]+)?/, /\.mt(-[a-zA-Z0-9]+)?/,
+        /\.page.has-open-slide(-[a-zA-Z]+)?/, /\.note/, /\.hlaquo-h1/, /\.slaquo-h1/, /\.vk/, /iframe/, /\.mb(-[a-zA-Z0-9]+)?/, /\.mt(-[a-zA-Z0-9]+)?/,
         /* eslint-enable max-len */
       ],
     },
@@ -304,7 +304,7 @@ function buildTwig() {
   // build to the parent folder, .i.e. src/
   // return gulp.src(paths.markup.src)
   // build to the same folder
-  return gulp.src(paths.markup.src, { base: './web/src/pages/' })
+  return gulp.src(paths.markup.src, { base: './src/pages/' })
     .pipe(plumber())
     .pipe(twig({
       base: paths.markup.dest,
