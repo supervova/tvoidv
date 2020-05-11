@@ -1,0 +1,36 @@
+// Modifiers are not defined in component files. The unique page styles are
+// written in the corresponded <head> section, and styles for a group of pages
+// are written in pages folder. E.g.
+// # /pages/company.scss
+// .hero.is-company { background: hsl(50, 100%, 50%); }
+
+@import 'base/functions';
+@import 'base/variables';
+
+// BS
+@import './node_modules/bootstrap/scss/functions';
+@import './node_modules/bootstrap/scss/variables';
+@import './node_modules/bootstrap/scss/mixins';
+// @import './node_modules/bootstrap/scss/grid';
+@import './node_modules/bootstrap/scss/utilities/display';
+// @import './node_modules/bootstrap/scss/utilities/spacing';
+
+// Base
+@import 'base/normalize';
+@import 'base/content/body';
+@import 'base/content/headings';
+@import 'base/graphics/icons';
+@import 'base/buttons';
+@import 'base/form/radio';
+@import 'base/layout';
+@import 'base/animation';
+
+// Components
+@import 'components/header/header';
+@import 'components/carousel/carousel';
+@import 'components/quiz/quiz';
+
+// Helpers & Print
+@import 'util/layout';
+@import 'base/print';
+

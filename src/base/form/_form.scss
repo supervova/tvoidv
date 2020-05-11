@@ -1,0 +1,56 @@
+// MARKUP TIP: use inputmode attribute to conrol keyboard appearance on mobile
+// devices
+// <input type="text" inputmode="url">
+// <input type="text" inputmode="email">
+// <input type="text" inputmode="search">
+// <input type="text" inputmode="numeric">
+// <input type="text" inputmode="tel">
+
+// With input(inputmode="decimal") the keyboard appears on iOS the same as the
+// tel case, but replaces the +*# key with a simple decimal (.).
+// <input type="text" inputmode="decimal">
+
+// Input container
+.form__group {
+  position: relative;
+  margin-bottom: $size-1;
+  padding-left: ($size-1 * 4);
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: ($size-1 * 2);
+  }
+}
+
+// Label
+.form__label.is-icon {
+  margin-bottom: 0;
+  position: absolute;
+  top: $size-1;
+  left: $size-1;
+  width: 20px;
+  height: 20px;
+}
+
+// Input, text area, select
+.form__control {
+  appearance: none;
+  background-clip: padding-box;
+  background-color: $color-bg-normal;
+  background-image: none;
+  border-radius: $border-radius-sm;
+  border: $border-width solid $color-ink-border;
+  color: $color-ink-muted;
+  display: block;
+  margin: 0 0 .8rem;
+  overflow: visible;
+  padding: 1.1rem 1.2rem 1.1rem 1.9rem;
+  transition: border-color $easing $duration-xs;
+  width: 100%;
+
+  &:focus {
+    color: $color-ink-normal;
+    border-color: $color-primary;
+    outline: 0;
+  }
+}
+

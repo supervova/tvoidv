@@ -1,0 +1,69 @@
+// MARKUP
+
+// label
+//   input.form__radio(name='', type='radio', value='')
+//   span.form__radio-toggle(aria-hidden='true')
+//   label text
+
+$radio-size:                            1.8rem;
+$radio-border-width:                    .2rem;
+$radio-color:                           $color-ink-border;
+$radio-color-active:                    $color-primary;
+
+// Hide the native radio button
+.form__radio,
+%form-radio {
+  border: 0;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+}
+
+// Custom radio button (additional decorative span). Basic appearance
+.form__radio ~ .form__radio-toggle,
+%form-radio-toggle {
+  background-color: $white-max;
+  border-radius: 50%;
+  border: $radio-border-width solid $radio-color;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: .3rem;
+  position: absolute;
+  top: .9rem;
+  left: $size-2;
+  transition: border-color $duration;
+  width: $radio-size;
+  height: $radio-size;
+}
+
+// Focus, hover and checked states
+.form__radio:hover ~ .form__radio-toggle,
+.form__radio:focus ~ .form__radio-toggle,
+.form__radio:checked ~ .form__radio-toggle,
+%form-radio-toggle-focus-hover {
+  border-color: $radio-color-active;
+}
+
+// Check
+.form__radio:checked ~ .form__radio-toggle,
+%form-radio-toggle-check {
+  background: $radio-color-active;
+
+  &::after {
+    background: rgba(0, 0, 0, 0) url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2218%22%20height%3D%2218%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpolygon%20fill%3D%22%23FFF%22%20fill-rule%3D%22evenodd%22%20points%3D%2213.37%205%2014.785%206.415%207.589%2013.612%204%2010.021%205.411%208.61%207.589%2010.782%22%2F%3E%3C%2Fsvg%3E%0A') no-repeat;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: $radio-size;
+    height: $radio-size;
+  }
+}
+
+

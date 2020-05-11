@@ -1,0 +1,32 @@
+// class applies to select element itself, not a wrapper element
+.form__control.is-select {
+  background-color: $color-bg-normal;
+
+  // Bg image uses 2 urls. The first is an svg data uri for the arrow icon, and
+  // the second is the gradient. It prevents IE9 and older from recognizing
+  // the background property, and as a result it won't show the custom icon
+  // alongside its unhideable native one.
+  // In order to change the color of icon, be sure to use `%23` instead of `#`,
+  // since it's a url. We can also swap in a different svg icon or an external
+  // image reference.
+  background-image:
+    $chevron-down,
+    linear-gradient($color-bg-normal, $color-bg-normal);
+  background-position: right $size-1 top 50%, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-size: 1.2rem .8rem, 100%;
+
+  width: 100%;
+  // useful when width is set to anything other than 100%
+  max-width: 100%;
+}
+
+// Hide arrow icon in IE browsers
+.form__control.is-select::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form__control.is-select option {
+  font-weight: normal;
+}

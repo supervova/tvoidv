@@ -1,0 +1,225 @@
+// stylelint-disable selector-no-qualifying-type
+
+$table-background:                      $color-bg-normal;
+
+$table-cell-padding-x:                  $size-2;
+$table-cell-padding-y:                  $size-2;
+$table-cell-padding:                    ($table-cell-padding-y - $border-width) $table-cell-padding-x $table-cell-padding-y;
+$table-accent-bg:                       $color-bg-accent;
+$table-hover-bg:                        hsla(0, 0%, 0%, .03);
+
+$table-fixed-column-width:              14.4rem;
+$table-fixed-column-width-md:           24rem;
+
+// MIXINS
+// table-has-fixed-col()
+// table-stack()
+// table-bordered()
+// table-borderless()
+
+@import 'mixins';
+
+// -----------------------------------------------------------------------------
+// BASE
+// -----------------------------------------------------------------------------
+
+// #region
+
+.table {
+  background-color: $table-background;
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  margin-bottom: $size-line;
+  table-layout: fixed;
+  width: 100%;
+  max-width: 100%;
+
+  // Simple CSS for scrollable table on mobile
+  min-width: 768px;
+}
+
+caption {
+  // caption-side: bottom;
+  color: inherit;
+  font-weight: bolder;
+  text-align: left;
+  padding-top: 0;
+  padding-bottom: $size-1;
+  padding-left: ($table-cell-padding-x / 2);
+}
+
+th,
+td {
+  border-top: $border-width solid $color-ink-border;
+  text-align: left;
+  padding: $table-cell-padding;
+  vertical-align: top;
+
+  &:first-child {
+    padding-left: ($table-cell-padding-x / 2);
+  }
+
+  &:last-child {
+    padding-right: ($table-cell-padding-x / 2);
+  }
+
+  // Remove margin from the last-child
+  > :last-child { margin-bottom: 0; }
+}
+
+thead th {
+  border-bottom: (2 * $border-width) solid $color-ink-border;
+  font-weight: bolder;
+  padding-bottom: ($table-cell-padding-y - $border-width * 2);
+  vertical-align: bottom;
+
+  &[colspan] {
+    text-align: center;
+  }
+}
+
+.table__th-vertical {
+  border-right: $border-width solid $color-ink-border;
+
+  tbody & {
+    background: $color-bg-normal;
+  }
+}
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// Hover effect and zebra striping (deprecated)
+// -----------------------------------------------------------------------------
+
+// #region
+
+// tbody tr:nth-of-type(odd) {
+//   background-color: $table-accent-bg;
+// }
+
+tbody tr:hover {
+  background-color: $table-hover-bg;
+  transition: background-color $duration-sm;
+}
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// Helpers
+// -----------------------------------------------------------------------------
+
+// #region
+
+.table__num {
+  text-align: right;
+}
+
+// Reduce cell to the width of its content, if space is available
+.table__shrinked-cell {
+  width: 1%;
+}
+
+// Row numbers
+tbody {
+  // Start the counter
+  tr {
+    counter-increment: row-number;
+  }
+}
+
+.table__row-number {
+  // Add the counter number
+  &::after {
+    content: counter(row-number);
+  }
+}
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// Responsive table
+// -----------------------------------------------------------------------------
+
+// #region
+
+// Markup
+// <div class="table-wrapper">
+//   <table></table>
+// </div>
+
+.table-wrapper {
+  box-shadow: $box-shadow-z2;
+  position: relative;
+  margin-bottom: $size-1;
+
+  // Scrolling shadow. On iOS devices, it scrolls with the table, despite
+  // background-attachment: scroll. TODO: research Carbon and other frameworks
+  // I've already tried these methods:
+  // https://dbushell.com/2016/03/04/css-only-responsive-tables/
+  // https://www.the-haystack.com/2013/09/24/responsive-scrollable-tables/
+  // &::after {
+  //   background-image:
+  //     linear-gradient(
+  //       90deg,
+  //       rgba($table-background, 0),
+  //       rgba($table-background, .16) 47%,
+  //       rgba($table-background, .5) 78%,
+  //       rgba($table-background, .84) 95%,
+  //       $table-background);
+  //   background-attachment: scroll;
+  //   background-position: 100% 0;
+  //   background-repeat: no-repeat;
+  //   background-size: $size-8 100%;
+  //   content: '';
+  //   pointer-events: none;
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   z-index: 1;
+  // }
+}
+
+.table-wrapper > table {
+  -webkit-overflow-scrolling: touch;
+  display: block;
+  overflow-x: auto;
+  margin-bottom: 0;
+  scroll-behavior: smooth;
+  width: auto;
+  max-width: none;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+  &:first-child {
+    padding-left: $table-cell-padding-x * 2;
+  }
+
+  &:last-child {
+    padding-right: $table-cell-padding-x * 2;
+  }
+}
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// VARIATIONS
+// -----------------------------------------------------------------------------
+
+// #region
+
+// Add more white space to the data
+.table.is-loose tbody th,
+.table.is-loose tbody td {
+  padding: $size-3 $size-1;
+}
+
+// If a table contains mostly numeric data, it is better to avoid line breaks.
+.table.has-small-cell-values {
+  white-space: nowrap;
+}
+
+// #endregion

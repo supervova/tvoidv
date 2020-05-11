@@ -1,0 +1,65 @@
+{% block config %}
+
+{#
+Timber / WP vars
+{{ site.language }}
+{{ site.name }}
+{{ site.description }}
+{{ site.url }}
+{{ site.theme.link }}
+
+{{ post.title }}
+{{ post.link }}
+{{ post.tags }}
+{{ post.content }}
+{{ post.thumbnail.src }}
+#}
+{# fonts: "family=Open+Sans:400,600&display=swap&subset=cyrillic", #}
+{% set
+  site = {
+    language: "ru",
+    name: "Интернет-викторины и тесты о Дальнем Востоке",
+    short_name: "ДВ тесты",
+    description: "Раздел портал «Твой дальний восток»",
+    url: "https://tvoidv.super-mark.ru",
+    base: false,
+    logo: "",
+    image: "/img/splash.jpg",
+    assets: "",
+    ui_sprite: "",
+    gtm: false,
+    facebook_admins: "",
+    facebook_app_id: "",
+    facebook_cta_like: false,
+    vk_api: "",
+    apple_app_id: "",
+    rss_title: "",
+  }
+%}
+
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="{{ site.language }}" prefix="og: http://ogp.me/ns#">
+<head>
+
+  {% block html_head %}
+    {% include "/pages/base/head.twig" %}
+  {% endblock %}
+</head>
+
+<body{% if post.classes %} class="{{ post.classes }}"{% endif %}>
+
+
+  {# CONTENT ---------------------------------------------------------------- #}
+  {% block content %}
+    {# Main content #}
+  {% endblock %}
+
+
+  {# SCRIPTS ---------------------------------------------------------------- #}
+  {% block scripts %}
+    {% include "/pages/base/scripts.twig" %}
+  {% endblock %}
+</body>
+</html>

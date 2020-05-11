@@ -1,0 +1,22 @@
+  <ol class="carousel__viewport">
+    {% for question in questions %}
+      <li class="carousel__slide" id="carousel-{{ question.serial }}" tabindex="0">
+        {# <div class="carousel__snapper"> #}
+          <h2>{{ question.text }}</h2>
+          {% for answer in question.answers %}
+            <label class="quiz__answer">
+              <input name="q-{{ question.serial }}" type="radio" value="{{ answer.value }}">
+              <span aria-hidden="true"></span>
+              {{ answer.text }}
+            </label>
+          {% endfor %}
+          {% if question.serial > 1 %}
+            <a class="carousel__back" href="#carousel-{{ question.serial - 1 }}">Назад</a>
+          {% endif %}
+          {# {% if question.serial > 1 && questions|length > question.serial %}
+            <a class="carousel__next" href="#carousel-{{ question.serial + 1 }}">Следующий вопрос</a>
+          {% endif %} #}
+        {# </div> #}
+      </li>
+    {% endfor %}
+  </ol>

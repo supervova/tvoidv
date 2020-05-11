@@ -1,0 +1,92 @@
+# A leading slash matches the beginning of the pathname.
+# For example, /*.html matches cat.html but not folder/dog.html
+
+# Trailing slash. foo/ will match a directory foo and paths underneath it,
+# but will not match a regular file or a symbolic link foo
+
+# Nested Folders.
+# products/*.html matches products/soap.html
+# but not products/cars/audi.html or branch/products/soap.html
+# *products*.html matches second and third paths:
+# products/cars/audi.html and branch/products/soap.html
+# the equivalent solution to using /folder/**/*.abc pattern would be
+# placing another .gitignore file into /folder/ and having pattern *.abc
+# there.
+
+# ------------------------------------------------------------------------------
+# BUILD
+# ------------------------------------------------------------------------------
+
+dist
+
+# ------------------------------------------------------------------------------
+# LOCAL DEVELOPMENT
+# ------------------------------------------------------------------------------
+
+# Editors
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+*.code-workspace
+*_notes
+.vscode/*
+
+#Build generated
+*.sass-cache*
+.tmp
+src/**/*.css
+sprite.symbol.html
+
+# Logs, backups
+*.bak
+*.log
+*.swp
+
+# Package managers
+.npm
+.yarn-integrity
+jspm_packages
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# All yarn.lock files should be checked into source control
+
+# Optional eslint cache
+.eslintcache
+
+# dotenv environment variables file(s)
+.env
+.env.*
+!.env.example
+
+# Serverless generated files
+.serverless/
+
+# SYSTEM FILES
+*.DS_Store
+*.app
+
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent

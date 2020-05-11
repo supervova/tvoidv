@@ -1,0 +1,227 @@
+
+{% extends "pages/base/base.twig" %}
+
+{% block config %}
+{{ parent() }}
+
+{% set
+  post = {
+    title: "Дальневосточная ипотека под 2%. Сможешь получить?",
+    description: "В сентябре 2019 года на Восточном Экономическом форуме президент России Владимир Путин анонсировал старт программы ипотечного кредитования на Дальнем Востоке. Ипотечный кредит при ставке под 2% банки уже выдают тысячам молодым семей региона. Это самая низкая ставка в России, а воспользоваться ей можем только мы – дальневосточники. Пройдите наш тест и узнайте, можете вы ли приобрести собственное жильё на лучших в стране ипотечных условиях.",
+    link: '',
+    image: "img/quiz-01/00-intro.jpg",
+    classes: "page is-home has-open-slide-0"
+  }
+%}
+
+{% set
+  photos = [
+    { key: '0', author: 'Allen Taylor', link: 'https://unsplash.com/@allentaylorjr' },
+    { key: '1', author: 'Sung Shin', link: 'https://unsplash.com/@ironstagram' },
+    { key: '2', author: 'Jessica Rockowitz', link: 'https://unsplash.com/@jessicarockowitz' },
+    { key: '3', author: 'Renate Vanaga', link: 'https://unsplash.com/@whynottogoforit' },
+    { key: '4', author: 'Василий Немчинов', link: 'https://unsplash.com/@nemchinov' },
+    { key: '5', author: 'Руслан Богданов', link: 'https://unsplash.com/@ruzzzig' },
+    { key: '6', author: 'Daniel Tseng', link: 'https://unsplash.com/@daniel840528' },
+    { key: '7', author: 'Raphael Rychetsky', link: 'https://unsplash.com/@raphaelfyi' },
+    { key: 'last', author: 'Яков Маншин', link: 'https://unsplash.com/@yakovmanshin' },
+
+  ]
+%}
+
+{#
+  {
+    key: ,
+    text: '',
+    answers: [
+      { text: '', value: '' },
+      { text: '', value: '' },
+      { text: '', value: '' },
+    ],
+  },
+#}
+
+{# Add isLast: true последнему вопросу #}
+{% set questions = [
+  {
+    key: 0,
+    title: '<b>Дальневосточная ипотека под&nbsp;2%.</b> Сможешь получить?',
+    lead: '<p>В&nbsp;сентябре 2019 года на&nbsp;Восточном Экономическом форуме президент России Владимир Путин анонсировал старт программы ипотечного кредитования на&nbsp;Дальнем Востоке. Ипотечный кредит при ставке под&nbsp;2% банки уже выдают тысячам молодым семей региона. Это самая низкая ставка в&nbsp;России, а&nbsp;воспользоваться ей&nbsp;можем только мы&nbsp;— дальневосточники.</p><p>Пройдите наш тест и&nbsp;узнайте, можете вы&nbsp;ли приобрести собственное жильё на&nbsp;лучших в&nbsp;стране ипотечных условиях.</p>'
+  },
+  {
+    key: 1,
+    text: 'Вы&nbsp;проживаете в&nbsp;Дальневосточном федеральном округе России?',
+    answers: [
+      { text: 'Да, проживаю здесь всю сознательную жизнь, чему несказанно рад', value: 'FE' },
+      { text: 'Давно переехал на&nbsp;Дальний Восток. Живу здесь больше года', value: 'FE' },
+      { text: 'Проживаю меньше года', value: 0 },
+      { text: 'Не&nbsp;проживаю и&nbsp;не&nbsp;планирую', value: 0 },
+      { text: 'Это там, где тигры по&nbsp;улицам гуляют?', value: 0 },
+    ],
+  },
+  {
+    key: 2,
+    text: 'Российское государство активно поддерживает молодые семьи. А&nbsp;как обстоят дела на&nbsp;личном фронте у&nbsp;вас?',
+    answers: [
+      { text: 'Есть супруг(а) и&nbsp;дети', value: 'family' },
+      { text: 'Есть супруг(а), детки пока только в&nbsp;планах', value: 'family' },
+      { text: 'Самостоятельно воспитываю ребенка до&nbsp;18&nbsp;лет', value: 'has child' },
+      { text: 'Мммм :) Хотите что-то на&nbsp;вечер предложить?', value: 0 },
+    ],
+  },
+  {
+    key: 3,
+    text: 'Уверены, что возраст счастью не&nbsp;помеха. Но&nbsp;всё-таки хотим спросить: вам уже исполнилось 36&nbsp;лет?',
+    answers: [
+      { text: 'Ещё не&nbsp;исполнилось ни&nbsp;мне, ни&nbsp;супругу(е). Вся жизнь впереди', value: 'lth 36' },
+      { text: 'Исполнилось! В&nbsp;36&nbsp;лет жизнь только начинается&nbsp;— меня ждут великие дела', value: 0 },
+      { text: '36&nbsp;лееееет? Столько не&nbsp;живут :)', value: 'lth 36' },
+    ],
+  },
+  {
+    key: 4,
+    text: 'Какое жильё вы&nbsp;бы хотели приобрести?',
+    answers: [
+      { text: 'Хочу квартиру в&nbsp;новостройке и&nbsp;непременно в&nbsp;городе', value: 'apt' },
+      { text: 'Планирую купить квартиру в&nbsp;сельской местности на&nbsp;вторичном рынке жилья', value: 'rural apt' },
+      { text: 'О! Я&nbsp;уже давно мечтаю о&nbsp;собственном доме! Где документы подписать?', value: 'house' },
+    ],
+  },
+  {
+    key: 5,
+    text: 'Как настроение? Не&nbsp;устали отвечать на&nbsp;вопросы?',
+    answers: [
+      { text: 'Если&nbsp;бы мне одобрили ипотеку под&nbsp;2%, было&nbsp;бы великолепным', value: 0 },
+      { text: 'Спасибо, хорошо. Настроение&nbsp;— весна!', value: 0 },
+    ],
+  },
+  {
+    key: 6,
+    text: 'На&nbsp;Дальнем Востоке по&nbsp;инициативе Президента России действует проект «Дальневосточный гектар». Слышали о&nbsp;нём что-то?',
+    answers: [
+      { text: 'Конечно, слышал. Уже оформляю!', value: 'ha' },
+      { text: 'Не&nbsp;слышал. И&nbsp;слушать не&nbsp;буду', value: 0 },
+      { text: 'Не&nbsp;слышал, но&nbsp;хотел&nbsp;бы построить дом или вести подсобное хозяйство', value: 'ha' },
+    ],
+  },
+  {
+    key: 7,
+    text: 'Если вы&nbsp;всё-таки решили принять участие в&nbsp;программе «Дальневосточный гектар», поделитесь с&nbsp;нами радостью, чем планируете там заниматься?',
+    isLast: true,
+    answers: [
+      { text: 'Только бизнес, ничего личного', value: 'ha' },
+      { text: 'Всегда хотел своё хозяйство, завести коровок, курочек... эх!', value: 'ha' },
+      { text: 'Это секретная информация', value: 'ha' },
+    ],
+  },
+] %}
+
+{% endblock %}
+
+{% block html_head %}
+  {{ parent() }}
+
+  <link rel="stylesheet" href="css/01.css">
+
+  {# <style>
+    body:hover { background: transparent url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%2224%22%20viewBox%3D%220%200%208%2024%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Crect%20width%3D%228%22%20height%3D%221%22%20y%3D%2223%22%20fill%3D%22%23000%22%20fill-opacity%3D%22.24%22%2F%3E%3Crect%20width%3D%228%22%20height%3D%221%22%20y%3D%2215%22%20fill%3D%22%23F0F%22%20fill-opacity%3D%22.12%22%2F%3E%3Crect%20width%3D%228%22%20height%3D%221%22%20y%3D%227%22%20fill%3D%22%23F0F%22%20fill-opacity%3D%22.12%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E') repeat; }
+    h1, h2 { background: hsla(240, 100%, 50%, .24); }
+    .btn { opacity: .6; }
+  </style> #}
+{% endblock %}
+
+{# MAIN CONTENT ------------------------------------------------------------- #}
+{% block content %}
+  <header class="header">
+    <svg class="logo">
+      <title>Твой Дальний Восток</title>
+      <use xlink:href="img/base/graphics/sprite.svg#logo"></use>
+    </svg>
+    <span class="header__subtitle d-md-none">Викторина</span>
+  </header>
+  <main class="wrapper">
+    <article class="quiz carousel slide" id="quiz" data-wrap="false" aria-label="Тест">
+      <div class="carousel__viewport">
+        {% for question in questions %}
+
+          {# Intro #}
+          {% if loop.first %}
+          <header class="quiz__section carousel-item active" id="slide-0">
+            <div class="quiz__section-content">
+              <h1 class="h1 has-eyebrow">
+                <span class="eyebrow d-none d-md-block">Викторина</span>
+                <span class="h1__base">{{ question.title }}</span>
+              </h1>
+
+              {{ question.lead }}
+              <a href="#quiz" class="btn is-primary" data-slide="next">Пройти тест</a>
+            </div>
+          </header>
+
+          {# Questions #}
+          {% else %}
+          <section class="quiz__section carousel-item" id="slide-{{ question.key }}">
+            <div class="quiz__section-content">
+              <h2 class="h2 has-eyebrow">
+                <span class="eyebrow d-none d-md-block">
+                  Викторина: {{ question.key }}/{{ questions|length - 1 }}
+                </span>
+                <span class="h2__base">{{ question.text }}</span>
+              </h2>
+              {% for answer in question.answers %}
+                <label class="quiz__answer {% if question.isLast %} is-last{% endif %}">
+                  <input name="q-{{ question.key }}" type="radio" value="{{ answer.value }}">
+                  <span aria-hidden="true"></span>
+                  {{ answer.text }}
+                </label>
+              {% endfor %}
+              {% if question.key > 0 %}
+                <a class="carousel__prev" href="#quiz" role="button" data-slide="prev">Назад</a>
+              {% endif %}
+            </div>
+          </section>
+          {% endif %}
+        {% endfor %}
+        <section class="quiz__section carousel-item" id="slide-last">
+          <div class="quiz__section-content">
+            <h2 class="h2 has-eyebrow">
+              <span class="eyebrow d-none d-md-block">
+                Викторина: ваш результат
+              </span>
+              <span class="h2__base" id="results-title"></span>
+            </h2>
+            <div id="results"></div>
+
+            <aside class="social-tools">
+              <h3>Поделиться результатами</h3>
+              <a class="social-tools__btn is-fb" href="https://www.facebook.com/share.php?u={{ post.link | url_encode }}&amp;title={{ post.title | url_encode }}" aria-label="Поделиться результатами в Фейсбуке">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use xlink:href="img/base/graphics/sprite.svg#icon-fb"></use>
+                </svg>
+              </a>
+              <a class="social-tools__btn is-vk" href="https://vk.com/share.php?url={{ post.link | url_encode }}" aria-label="Поделиться результатами во Вконтакте">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use xlink:href="img/base/graphics/sprite.svg#icon-vk"></use>
+                </svg>
+              </a>
+              <a class="social-tools__btn is-tw" href="https://twitter.com/home?status='{{ post.title | url_encode }}'+{{ post.link | url_encode }}" aria-label="Поделиться результатами в Твиттере">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use xlink:href="img/base/graphics/sprite.svg#icon-tw"></use>
+                </svg>
+              </a>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </article>
+    <figure class="picture is-main">
+      {% for photo in photos %}
+        <div class="img is-slide-{{ photo.key }}" role="img">
+          <a class="sr-only" href="{{ photo.link }}">Фото: {{ photo.author }}, Unsplash</a>
+        </div>
+      {% endfor %}
+    </figure>
+  </main>
+{% endblock %}
+
+

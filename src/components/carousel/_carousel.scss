@@ -1,0 +1,67 @@
+// Notes on the classes:
+// 1. .carousel touch-action should ideally be pan-y (to allow for users to scroll
+//     vertically) even when their scroll action started on a carousel, but for
+//     compatibility (with Firefox) we're preventing all actions instead
+// 2.  The .carousel-item-left and .carousel-item-right is used to indicate where
+//     the active slide is heading.
+// 3. .carousel-item.active is the current slide.
+// 4. .carousel-item-left.active and .carousel-item-right.active is the current
+//     slide in its in-transition state. Only one of these occurs at a time.
+// 5. .carousel-item-next.carousel-item-left and .carousel-item-prev.carousel-item-right
+//     is the upcoming slide in transition.
+
+
+$carousel-transition:                   opacity $duration-lg $easing;
+$carousel-prev-next-chevron:            url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpolygon%20fill-opacity%3D%22.54%22%20fill-rule%3D%22evenodd%22%20points%3D%226%200%207.41%201.41%202.83%206%207.41%2010.59%206%2012%200%206%22%20transform%3D%22translate%284%202%29%22%2F%3E%3C%2Fsvg%3E%0A');
+
+.carousel {
+  position: relative;
+  // touch-action: pan-y;
+}
+
+.carousel__viewport {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+
+
+
+
+.carousel-item {
+  opacity: 0;
+  backface-visibility: hidden;
+  display: none;
+  margin-right: -100%;
+  position: relative;
+  transition: $carousel-transition;
+  width: 100%;
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+}
+
+.carousel-item.active,
+.carousel-item-next.carousel-item-left,
+.carousel-item-prev.carousel-item-right {
+  opacity: 1;
+  z-index: 1;
+}
+
+.active.carousel-item-left,
+.active.carousel-item-right {
+  opacity: 0;
+  z-index: 0;
+}
+
+.carousel__prev {
+  background: rgba(0, 0, 0, 0) $carousel-prev-next-chevron no-repeat 0 calc(50% + .5rem);
+  display: block;
+  padding-top: $size-1 + .2rem;
+  padding-left: $size-3;
+}

@@ -1,0 +1,12 @@
+// Disable search button when input is empty
+
+.search__btn {
+  pointer-events: none;
+  opacity: .5;
+}
+
+input:not(:placeholder-shown) + .search__btn {
+  pointer-events: all;
+  opacity: 1;
+}
+

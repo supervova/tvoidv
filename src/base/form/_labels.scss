@@ -1,0 +1,25 @@
+// -----------------------------------------------------------------------------
+// MATERIAL DESIGN LIKE ANIMATED LABELS
+// -----------------------------------------------------------------------------
+
+// MARKUP
+// .form-group
+//   label(for='form-password') Password <span aria-hidden="true">*</span>
+//   input#form-password.form-control(type='password', required='')
+
+input,
+label {
+  position: relative;
+}
+
+label {
+  top: 36px;
+  transition: all $duration-lg $easing;
+  z-index: 1;
+}
+
+// Class set with JS
+.is-filled label {
+  top: 0;
+  font-size: $font-size-small;
+}

@@ -1,0 +1,182 @@
+// -----------------------------------------------------------------------------
+// TYPOGRAPHY
+// -----------------------------------------------------------------------------
+
+// LINE HEIGHT CALCULATION
+// @param {Number} $font-size - Font-size of headline.
+// @param {Number} $factor [.8] - Global microgrid unit
+// @param {Number} $ratio [1.2] - Headlines line height ratio
+// @param {Number} $increment [1] - Global microgrid units added to small font
+// @param {Number} $body-line-height [2.4rem] - Body copy line height
+// @example
+//     line-height: line-height(40);
+
+@function line-height(
+  $font-size,
+  $factor: .8,
+  $ratio: 1.2,
+  $increment: 1,
+  $body-line-height: 2.4rem) {
+
+  // Makes font value unitless
+  // @if unitless($font-size) { btw, unitless can be checked }
+  $unitless-size: ($font-size / 1rem);
+
+  // Headlines
+  // ($font-size-base * $line-height-base) equals line height in rems
+  @if $font-size > $body-line-height {
+    $rough-value: $unitless-size * $ratio;
+
+    @if $rough-value % $factor == 0 {
+      @return $ratio;
+    } @else {
+      @return (round($rough-value / $factor) * $factor) / $unitless-size;
+    }
+  }
+
+  // Small fonts
+  @else {
+    @return (round($unitless-size / $factor) * $factor + ($increment * $factor)) / $unitless-size;
+  }
+}
+
+// MARGIN BOTTOM CALCULATION
+// TODO: test and, if necessary, adjust calculation based on item line height.
+// @see  https://github.com/hiulit/Sassy-Gridlover/blob/master/sassy-gridlover/_sassy-gridlover.scss
+// @param {Number} $line-height - Unitless line-heigh. E.g. 24.
+// @param {Number} $multiplier [1] - Bottom margin in body copy lines.
+// @param {String} $next-is ['box'] - Type of the next block ('box', 'text').
+// 'Box' is for divs, tables, images and 'text' is for paragraphs, lists and
+// blockquotes
+
+@function margin-bottom(
+  $line-height,
+  $multiplier: 1,
+  $next-is: 'box',
+  $body-line-height: ($font-size-base * $line-height-base)) {
+
+  @if $next-is == 'box' {
+    $decrement: 0;
+  }
+
+  @else {
+    $decrement: $body-line-height / 4;
+  }
+
+  @return ($body-line-height * $multiplier) - $decrement;
+}
+
+
+// -----------------------------------------------------------------------------
+// GRID
+// -----------------------------------------------------------------------------
+
+// GRID-TEMPLATE-AREAS HELPER
+// @param {List} $list - Width of areas in columns and their names.
+// I.e. 3, 'first-quoter', 6, 'half', 4, 'last-quoter'
+//    @example
+
+//    // SCSS
+//    .cards {
+//      @extend %grid;
+//      // other styles: i.e. margins
+
+//      @media (min-width: 768px) {
+//        grid-template-areas:
+//          row((6, 'card1', 6, 'card2'))
+//          row((6, 'card3', 6, 'card4'));
+//      }
+//    }
+
+//    .card1 {
+//      grid-area: card1;
+//    }
+
+//    // other cards
+
+//    // CSS
+//    .cards {
+//      display: grid;
+//      grid-column-gap: .8rem;
+//      grid-template-columns: repeat(12, 1fr);
+//      // other styles: i.e. margins
+
+//      @media (min-width: 768px) {
+//        grid-template-areas:
+//          'card1 card1 card1 card1 card1 card1 card2 card2 card2 card2 card2 card2'
+//          'card3 card3 card3 card3 card3 card3 card4 card4 card4 card4 card4 card4';
+//      }
+//    }
+
+//    .card1 {
+//      grid-area: card1;
+//    }
+
+//    // other cards
+
+
+@function row($list) {
+  $areas: '';
+
+  // Iterate through list
+  @for $i from 1 through length($list) {
+    @if $i % 2 != 0 {
+      $count: nth($list, $i);
+
+      // Repeat the area name at $i+1 for $count number of times
+      @for $j from 1 through $count {
+        $areas: $areas + ' ' + nth($list, $i+1);
+      }
+    }
+  }
+  @return $areas;
+}
+
+
+// -----------------------------------------------------------------------------
+// MATH
+// -----------------------------------------------------------------------------
+
+// ROUND A DECIMAL TO SPECIFIED DIGITS
+
+// @param  {Number} $number A number to round
+// @param  {Number} [0] Digits to output
+// @param  {String} [round] (round|ceil|floor) How to round a number
+// @return {Number} A rounded number
+// @example
+//     decimal-round(0.333)    => 0
+//     decimal-round(0.333, 1) => 0.3
+//     decimal-round(0.333, 2) => 0.33
+//     decimal-round(0.666)    => 1
+//     decimal-round(0.666, 1) => 0.7
+//     decimal-round(0.666, 2) => 0.67
+
+@function decimal-round ($number, $digits: 0, $mode: round) {
+  $n: 1;
+  // $number must be a number
+  @if type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  // $digits must be a unitless number
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @if $mode == round {
+    @return round($number * $n) / $n;
+  } @else if $mode == ceil {
+    @return ceil($number * $n) / $n;
+  } @else if $mode == floor {
+    @return floor($number * $n) / $n;
+  } @else {
+    @warn '#{ $mode } is undefined keyword.';
+    @return $number;
+  }
+}

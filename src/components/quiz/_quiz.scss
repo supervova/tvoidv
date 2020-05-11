@@ -1,0 +1,168 @@
+.quiz > .carousel__viewport {
+  background: $color-bg-normal;
+  border-radius: $border-radius-xl;
+  box-shadow: $box-shadow-z5;
+  margin: ($size-line * 10) auto ($size-line * 3);
+  overflow: hidden;
+  width: calc(100vw - #{$size-2});
+
+  @include media-breakpoint-up(md) {
+    margin: 0;
+    width: 64.2rem;
+  }
+}
+
+.quiz__section {
+  --min-height: 0;
+
+  border-radius: $border-radius-xl;
+  padding: $size-line 2rem ($size-line * 2);
+  min-height: var(--min-height);
+
+  &:focus {
+    outline: 0;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding: ($size-line * 2) $size-4 ($size-line * 3);
+  }
+}
+
+.quiz__section-content {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 49.8rem;
+}
+
+.quiz__section:nth-child(even) {
+  background: $color-bg-accent;
+}
+
+// Label
+.quiz__answer {
+  border-radius: $border-radius;
+  cursor: pointer;
+  display: block;
+  flex-basis: 100%;
+  transition: background-color $duration;
+  margin-right: -$size-2;
+  margin-left: -$size-2;
+  padding: .6rem $size-2 .6rem $size-5;
+  position: relative;
+
+  &:hover {
+    background-color: $color-primary-transparent;
+  }
+}
+
+.quiz__answer + .quiz__answer {
+  margin-top: .4rem;
+}
+
+// Hide native input
+.quiz__answer > input {
+  @extend %form-radio;
+}
+
+// Basic appearance
+.quiz__answer > span {
+  @extend %form-radio-toggle;
+}
+
+.quiz__answer > input:hover ~ span,
+.quiz__answer > input:focus ~ span,
+.quiz__answer > input:checked ~ span {
+  @extend %form-radio-toggle-focus-hover;
+}
+
+// Checked
+
+.quiz__answer > input:checked ~ span {
+  @extend %form-radio-toggle-check;
+}
+
+// Button
+
+p + .btn.is-primary {
+  margin-top: -.6rem;
+}
+
+// -----------------------------------------------------------------------------
+
+// IMAGES
+
+.picture.is-main {
+  background-color: $color-primary-tint3;
+  margin-bottom: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(61.8% + #{$size-line * 2});
+  z-index: -1;
+
+  @include media-breakpoint-up(lg) {
+    bottom: 0;
+    width: 38.2%;
+    height: auto;
+  }
+}
+
+.picture.is-main .img {
+  --background-image: 'linear-gradient($color-primary-tint5, $color-primary-tint5)';
+
+  background-color: $color-primary-tint5;
+  background-image: var(--background-image);
+  background-position: center calc(50% + 4rem);
+  background-repeat: no-repeat;
+  background-size: cover;
+  clip-path: circle(0%);
+  // opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  visibility: hidden;
+
+  @include media-breakpoint-up(md) {
+    background-position: center calc(50% + 6rem);
+  }
+
+  @include media-breakpoint-up(lg) {
+    background-blend-mode: color, normal;
+    background-image:
+      linear-gradient($color-primary, $color-primary),
+      var(--background-image);
+    background-position:
+      right top,
+      center top;
+    background-repeat: no-repeat;
+    background-size:
+      ($size-line * 3) 100vh,
+      cover;
+  }
+
+  @include media-breakpoint-up(xl) {
+    transition: clip-path $duration-xl $easing;
+  }
+}
+
+.page.has-open-slide-last .img.is-slide-last,
+%show-pic {
+  clip-path: circle(75%);
+  visibility: visible;
+}
+
+@for $i from 0 through 7 {
+  .page.has-open-slide-#{$i} .img.is-slide-#{$i} {
+    @extend %show-pic;
+  }
+}
+
+
+
+
+
+
+

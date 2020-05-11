@@ -1,0 +1,73 @@
+.header {
+  background: $color-primary;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.4rem 2rem 0;
+  height: $size-line * 3;
+
+  @include media-breakpoint-up(md) {
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    top: $size-6;
+    left: $size-6;
+    width: 10.6rem;
+    height: 10.6rem;
+    z-index: $zindex-fixed;
+
+    &::before {
+      background: $color-secondary;
+      border-radius: 50%;
+      content: '';
+      position: absolute;
+      top: -$size-1;
+      left: -$size-1;
+      width: 4.1rem;
+      height: 4.1rem;
+    }
+  }
+
+  @include media-breakpoint-up(full-hd) {
+    top: $size-line * 2;
+    left: $size-line * 2;
+    width: 17.3rem;
+    height: 17.3rem;
+
+    &::before {
+      width: 6.6rem;
+      height: 6.6rem;
+    }
+  }
+}
+
+.header__subtitle {
+  @extend %eyebrow;
+
+  display: inline-block;
+  color: $color-ink-inverse-normal;
+  padding-top: $size-1;
+
+  &::before {
+    background-color: lighten($color-secondary, 25%);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// LOGO
+
+.logo {
+  width: 8rem;
+  height: 3.7rem;
+
+  @include media-breakpoint-up(md) {
+    width: auto;
+    height: 3.2rem;
+  }
+
+  @include media-breakpoint-up(full-hd) {
+    width: auto;
+    height: 4.8rem;
+  }
+}

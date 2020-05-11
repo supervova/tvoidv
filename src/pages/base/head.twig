@@ -1,0 +1,16 @@
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ post.title }}</title>
+  <meta name="description" content="{{ post.description }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}/{% if site.base %}{{ site.base }}{% endif %}{{ post.link }}">
+  <meta property="og:title" content="{{ post.title }}">
+  <meta property="og:description" content="{{ post.description }}">
+  <meta property="og:image" content="{{ post.image }}">
+  <meta name="twitter:card" content="summary_large_image">
+{% if site.fonts %}
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{ site.fonts }}">
+{% endif %}
+  <link rel="stylesheet" href="css/style.css?{{ 'now' | date('Y-m-d-H:i') }}">
+

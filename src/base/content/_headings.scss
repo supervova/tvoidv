@@ -1,0 +1,148 @@
+// stylelint-disable selector-list-comma-newline-after
+
+// VERTICAL RHYTHM
+// It is created by padding, which is added to the headings at the top and
+// bottom, so that their height is a multiple of the unit of the microgrid.
+
+// -----------------------------------------------------------------------------
+
+// EYEBROW
+
+.eyebrow,
+%eyebrow {
+  color: $color-ink-muted;
+  display: block;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  padding-top: .7rem;
+
+  &::before {
+    background-color: $color-secondary;
+    border-radius: 50%;
+    content: '';
+    display: inline-block;
+    margin-right: $size-1;
+    vertical-align: .1rem;
+    width: $size-1;
+    height: $size-1;
+  }
+}
+
+// -----------------------------------------------------------------------------
+
+// H1 & H2
+
+h1, h2 {
+  color: $color-primary;
+  font-family: $font-family-accent;
+  // OpenType kerning
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+
+// Heading 1
+// Expected %-placeholder "%h1" to match specified pattern (scss/percent-placeholder-pattern)
+h1,
+.h1,
+%heading-1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-h1);
+  line-height: var(--line-height-h1);
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  @include media-breakpoint-up(lg) {
+    letter-spacing: -.1rem;
+  }
+}
+
+.h1.has-eyebrow {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .h1__base {
+    display: block;
+    padding-top: .7rem;
+    padding-bottom: 1.8rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: .3rem;
+      padding-bottom: 1.4rem;
+    }
+  }
+}
+
+// Heading 2
+h2,
+.h2,
+%heading-h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-h2);
+  line-height: var(--line-height-h2);
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.h2.has-eyebrow {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .h2__base {
+    display: block;
+    padding-top: .6rem;
+    padding-bottom: 1rem;
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 0;
+      padding-top: $size-1;
+      padding-bottom: $size-2 + .1rem;
+    }
+  }
+}
+
+address + h2,
+blockquote + h2,
+dl + h2,
+h3 + h2,
+h4 + h2,
+ol + h2,
+p + h2,
+pre + h2,
+ul + h2,
+.h2.is-subhead {
+  margin-top: -$text-body-copy-vr-offset;
+}
+
+// -----------------------------------------------------------------------------
+
+// SUBHEADS
+
+h3, h4, h5, h6 {
+  font-size: 100%;
+  margin-top: $size-line * 2;
+  margin-bottom: $size-line;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+h3 {
+  text-transform: uppercase;
+}
+
+h3 + h4 {
+  margin-top: $size-line;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

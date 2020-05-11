@@ -1,0 +1,446 @@
+// stylelint-disable declaration-colon-space-after, order/order
+
+// SASS VARIABLES VS CUSTOM PROPERTIES
+// Sass variables have a simpler syntax. They can be used in custom and built-in
+// sass functions. Use custom properties as an addition for special cases.
+
+// 1) For projects with different color themes.
+// 2) In media queries for responsiveness.
+// 3) For customization with JS. For example, for the selection of sizes,
+// colors, accessories in online stores. For branding a web application
+// or affiliate site Etc.
+// 4) To calculate delays in staggered animation.
+
+// For modifications, it is better to use the inheritance approach. There are
+// general, unchanging styles in the base class. There are options are
+// in the modifiers.
+
+// .btn { border-radius: $borer-radius; }
+// .btn.is-primary: { background: $color-primary; }
+
+// -----------------------------------------------------------------------------
+// 🎨 COLORS
+// -----------------------------------------------------------------------------
+// #region
+
+
+// The HSL variables can be used for color calculations: hsl(($h + 30), $s, $l).
+// Next example is a creating a triad color scheme.
+// $scheme-colors: 3;
+// $h-step: 360 / $scheme-colors;
+// $color-secondary: hsl(($h + $h-step), $s, $l);
+
+$h:                                     221;
+$s:                                     96%;
+$l:                                     18%;
+
+// But we can use an easy way
+
+// FUNCTIONAL PALETTE
+
+$red:                                   hsl(0, 96%, 44%);
+$yellow:                                hsl(60, 96%, 44%);
+$green:                                 hsl(120, 96%, 44%);
+$blue:                                  hsl(221, 96%, 44%);
+$blue-navy:                             hsl(221, 96%, 18%);
+$magenta:                               hsl(300, 96%, 44%);
+
+// To create other colors change hue by 30. red: 0, orange: 30, yellow: 60,
+// lime: 90, green: 120, turquoise: 150, cyan: 180, cobalt: 210, blue: 210,
+// violet: 270, crimson: 330.
+
+// Neutral colors
+$transparent:                           hsla(0, 0%, 0%, 0);
+
+$black-max:                             hsla(0, 0%, 0%, .87);
+$black-2:                               hsla(0, 0%, 0%, .54);
+$black-3:                               hsla(0, 0%, 0%, .38);
+$black-4:                               hsla(0, 0%, 0%, .22);
+$black-penult:                          hsla(0, 0%, 0%, .12);
+$black-min:                             hsla(0, 0%, 0%, .05);
+
+$white-max:                             hsl(0, 0%, 100%);
+$white-2:                               hsla(0, 0%, 100%, .7);
+$white-3:                               hsla(0, 0%, 100%, .5);
+$white-penult:                          hsla(0, 0%, 100%, .12);
+
+// COLOR ROLES
+
+// Brand blue
+$color-primary:                         $blue-navy;
+$color-primary-tint1:                   lighten($color-primary, 5%);
+$color-primary-tint2:                   lighten($color-primary, 10%);
+$color-primary-tint3:                   lighten($color-primary, 15%);
+$color-primary-tint5:                   lighten($color-primary, 25%);
+$color-primary-tint8:                   lighten($color-primary, 40%);
+$color-primary-lightest:                lighten($color-primary, 78%);
+$color-primary-scrim:                   rgba($color-primary, .8);
+$color-primary-transparent:             rgba($color-primary, .05);
+
+// SECONDARY COLOR can be used for buttons and mobile drawer header
+$color-secondary:                       $red;
+
+// BASE BACKGROUNDS
+$color-bg-normal:                       $white-max;
+$color-bg-accent:                       $color-primary-lightest;
+$color-bg-inverse:                      $color-primary;
+$color-bg-scrim:                        rgba(#000, .72);
+
+// FEEDBACK COLORS
+// Use relative luminance calculator in order to achieve backgrounds consistency
+// To create colored text use contrast checkers to keep the necessary level
+// of contrast for the body copy and headings: 4.5 and 3, respectively.
+
+$color-error:                           $red;
+$color-error-bg:                        lighten($color-error, 34%);
+$color-error-title:                     $color-error;
+$color-error-text:                      darken($color-error, 1%);
+
+$color-info:                            $color-primary;
+
+$color-success:                         $green;
+
+$color-warning:                         $yellow;
+$color-warning-bg:                      lighten($color-warning, 45%);
+$color-warning-title:                   darken($color-warning, 18%);
+$color-warning-text:                    darken($color-warning, 25%);
+
+$color-highlight:                       $yellow;
+
+// INKS / FOREGROUNDS
+// Inks are foreground colors for texts, borders, and icons.
+// In order to use the sass contrast check functions, the colors should
+// be moved to the map.
+$color-ink-normal:                      $black-max;
+$color-ink-muted:                       $black-2;
+$color-ink-hint:                        $black-3;
+$color-ink-disabled:                    $black-3;
+$color-ink-icon:                        $black-4;
+$color-ink-border:                      $black-penult;
+$color-ink-link:                        $blue;
+$color-ink-code:                        $magenta;
+
+$color-ink-accent-normal:               $white-max;
+$color-ink-accent-muted:                $white-2;
+$color-ink-accent-hint:                 $white-3;
+$color-ink-accent-disabled:             $white-3;
+$color-ink-accent-icon:                 $white-3;
+$color-ink-accent-border:               $white-penult;
+$color-ink-accent-link:                 $blue;
+
+$color-ink-inverse-normal:              $white-max;
+$color-ink-inverse-muted:               $white-2;
+$color-ink-inverse-hint:                $white-3;
+$color-ink-inverse-disabled:            $white-3;
+$color-ink-inverse-icon:                $white-3;
+$color-ink-inverse-border:              $white-penult;
+$color-ink-inverse-link:                lighten($blue, 5%);
+
+$hover-brightness:                      1.2;
+// #endregion
+
+// ---------------------------------------------------------------------------
+// 📰 LAYOUT
+// ---------------------------------------------------------------------------
+// #region
+
+$size-1:                                .8rem;
+$size-2:                                $size-1 * 2;
+$size-3:                                $size-1 * 3;
+$size-4:                                $size-1 * 4;
+$size-5:                                $size-1 * 5;
+$size-6:                                $size-1 * 6;
+$size-7:                                $size-1 * 7;
+$size-8:                                $size-1 * 8;
+
+// For larger values use derived lines. E.g. $size-line * 3
+$size-line:                             $size-3;
+
+// Bootstrap utilities variables
+$grid-breakpoints: (
+  xs:   0,
+  sm:   568px,
+  md:   768px, // Use the same layout as on sm, but with vertical navbar
+  lg:   1024px,
+  xl:   1280px,
+  // xxl:  1440px,
+  full-hd: 1920px,
+  // jumbo: 2560px // iMac 27''
+);
+
+// Maps to generate maximum width of the container for each breakpoint
+$container-max-widths: (
+  // Tablet in landscape: 72*12 + 8*11
+  lg: 952px,
+
+  // Laptop: 96*12 + 8*11
+  xl: 1240px,
+
+  // Full HD - 1920x1080 and up: 136*12 + 8*11
+  xxl: 1720px
+);
+
+// Using: @media #{$mq-retina} { … }
+$mq-retina: 'print, (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 1.25dppx), (min-resolution: 120dpi)';
+// #endregion
+
+// #endregion
+
+// ---------------------------------------------------------------------------
+// 🔠 TYPOGRAPHY
+// ---------------------------------------------------------------------------
+// #region
+
+// stylelint-disable indentation
+$font-family-base:
+ 'Helvetica Neue',
+  Helvetica,
+ 'Roboto',
+  Arial,
+  sans-serif,
+ 'Apple Color Emoji',
+ 'Segoe UI Emoji',
+ 'Segoe UI Symbol',
+ 'Noto Color Emoji';
+
+$font-family-accent:
+ 'SFUI',
+//  'Open Sans',
+  sans-serif,
+ 'Apple Color Emoji',
+ 'Segoe UI Emoji',
+ 'Segoe UI Symbol',
+ 'Noto Color Emoji';
+
+$font-family-monospace:
+ 'Fira Code',
+  Menlo,
+  Courier,
+ 'Courier New',
+  monospace;
+
+$font-family-serif:
+ 'EB Garamond',
+  Georgia,
+  Times,
+ 'Times New Roman',
+  serif,
+ 'Apple Color Emoji',
+ 'Segoe UI Emoji',
+ 'Segoe UI Symbol',
+ 'Noto Color Emoji';
+
+// Headings sizes increase on large screens. See the custom properties section
+// below.
+
+// 3:4 — чистая кварта (perfect fourth)
+$font-size-h1:                          2.8rem;
+$line-height-h1:                        32 / 28;
+$font-weight-h1:                        400;
+
+$font-size-h2:                          2.1rem;
+$line-height-h2:                        line-height(21);
+$font-weight-h2:                        400;
+
+$font-size-base:                        1.8rem;
+$line-height-big:                       line-height(18);
+
+$font-size-base:                        $size-2; // 16px
+$line-height-base:                      1.5; // 24px
+
+$font-size-small:                       $size-1 * 1.5; // 12px
+$line-height-small:                     1.333; // 16px
+
+$text-body-copy-vr-offset:              .6rem;
+
+$list-bullet:                           url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%225%22%20height%3D%227%22%20viewBox%3D%220%200%205%207%22%3E%3Ccircle%20cx%3D%222.5%22%20cy%3D%222.5%22%20r%3D%222.5%22%20fill-opacity%3D%22.38%22%20fill-rule%3D%22evenodd%22%2F%3E%3C%2Fsvg%3E');
+// stylelint-enable indentation
+
+// #endregion
+
+// ---------------------------------------------------------------------------
+// 📦 COMPONENT BOXES
+// ---------------------------------------------------------------------------
+// #region
+
+$border-width:                          .1rem;
+
+// BOX BORDER RADIUS
+
+// Alerts, Cards, Rectangular Images
+$border-radius-sm:                      .3rem;
+
+// Buttons
+$border-radius:                         .5rem;
+
+// Dropdowns, Modal Bottom Sheets, Pickers, Sticky Blocks, Popovers, Tooltips
+$border-radius-lg:                      1.2rem;
+
+// Modals
+$border-radius-xl:                      2.4rem;
+
+// BOX SHADOWS
+// Increasing the number of shadows and decreasing the alpha value.
+// The difference of arithmetic progression can be changed. E.g., by making it
+// equal 8, we can achieve very soft shadows of the highest level: 1-9-17-25-33
+// Another method: create shape in Photoshop with minimum and maximum
+// elevation shadows and then create tween to get intermediate values.
+
+// Buttons, Cards, Alerts, App Bar, Tab Bar, Switches
+$box-shadow-z1:                         0 1px 1px 0 rgba(0, 0, 0, .04);
+
+// FAB, Buttons hover, Snackbars
+$box-shadow-z2:
+  0 10px 18px -3px rgba(0, 0, 0, .05),
+  0 6px 6px -2px rgba(0, 0, 0, .06);
+
+// FAB hover, Drawers, Dropdowns, Modal Bottom Sheets, Pickers, Sticky Blocks
+$box-shadow-z3:
+  0 20px 36px -6px rgba(0, 0, 0, .08),
+  0 12px 12px -4px rgba(0, 0, 0, .1);
+
+// Popovers, Tooltips
+$box-shadow-z4:
+  0 30px 54px -9px rgba(0, 0, 0, .1),
+  0 18px 18px -6px rgba(0, 0, 0, .13);
+
+// Modals
+$box-shadow-z5:
+  0 40px 72px -12px rgba(0, 0, 0, .12),
+  0 24px 24px -8px rgba(0, 0, 0, .16);
+
+$box-shadow-focus-outline:              0 0 0 4px rgba($color-primary, .5);
+
+// BOX Z-INDEX
+$zindex-dropdown:                       1000;
+$zindex-sticky:                         1020;
+$zindex-fixed:                          1030;
+$zindex-popover:                        1040;
+$zindex-tooltip:                        1050;
+$zindex-scrim:                          1060;
+$zindex-drawer:                         1070;
+$zindex-modal:                          1080;
+
+// Material design order
+// https://material.io/design/environment/elevation.html
+// Dialog: 24dp
+// Nav drawer: 16dp
+// FAB: 6dp
+// App bar: 4dp
+// Button: 2dp
+// Card: 1dp to 8dp (for dragging)
+
+
+// PANEL WIDTHS
+
+$width-xs:                              200px;
+
+// Tooltips, mobile drawers
+$width-sm:                              280px;
+
+// Dropdowns, popovers, tablet and desktop drawers
+$width:                                 320px;
+
+// Wide drawers, modals on tablets
+$width-md:                              640px;
+
+// Modals on desktops,
+$width-lg:                              800px;
+
+
+// PADDINGS
+
+$box-padding-sm:                        $size-2;
+$box-padding-line:                      $size-line;
+$box-padding-lg:                        $size-4; // 32
+$box-padding-xl:                        $size-5; // 40
+
+$chevron-down:                          url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpolygon%20fill-opacity%3D%22.12%22%20fill-rule%3D%22evenodd%22%20points%3D%227.705%204.295%206.295%205.705%2010.875%2010.295%206.295%2014.885%207.705%2016.295%2013.705%2010.295%22%20transform%3D%22rotate%2890%2010%2010.295%29%22%2F%3E%3C%2Fsvg%3E');
+
+// #endregion
+
+// ---------------------------------------------------------------------------
+// 👻 ANIMATION & TRANSITIONS
+// ---------------------------------------------------------------------------
+// #region
+
+// Use shorter for disappearing  elements. To do that set transitions on both
+// states, like this:
+// .el { transition: all $duration-sm $easing-disappearance; }
+// .el.is-hidden { transition: all $duration-md $easing-appearance; }
+$duration-xs:                           .1s;
+
+// Medium elements changing states
+// and disappearance
+$duration-sm:                           .2s;
+
+// Medium elements appearance,
+// large elements changing states
+// and disappearance
+$duration:                              .25s;
+
+// Medium to large elements appearance
+$duration-md:                           .3s;
+
+// Large elements appearance
+$duration-lg:                           .5s;
+$duration-xl:                           .8s;
+
+$easing:                                cubic-bezier(.4, 0, .2, 1); // accented ease-in-out
+$easing-appearance:                     cubic-bezier(0, 0, .2, 1); // accented ease-out
+$easing-disappearance:                  cubic-bezier(.4, 0, 1, 1); // ease-in
+$easing-bounce:                         cubic-bezier(.175, .885, .32, 1.275);
+
+// #endregion
+
+// -----------------------------------------------------------------------------
+// 🤠 CUSTOM PROPERTIES
+// -----------------------------------------------------------------------------
+// #region
+
+:root {
+  --font-size-h1:                       #{$font-size-h1};
+  --line-height-h1:                     #{$line-height-h1};
+  --font-weight-h1:                     #{$font-weight-h1};
+
+  --font-size-h2:                       #{$font-size-h2};
+  --line-height-h2:                     #{$line-height-h2};
+  --font-weight-h2:                     #{$font-weight-h2};
+
+  --font-size-big:                      #{$font-size-base};
+  --line-height-big:                    #{$line-height-base};
+  --font-weight-big:                    bolder;
+
+  @media screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) {
+    // 1:1.618 — золотое сечение (golden ratio)
+    --font-size-h1:                     4.2rem;
+    --line-height-h1:                   #{(4.8 / 4.2)};
+
+    --font-size-h2:                     2.6rem;
+    --line-height-h2:                   #{(3.2 / 2.6)};
+
+    --font-size-big:                    #{$size-1 * 2.5};
+    --line-height-big:                  #{line-height(20)};
+    --font-weight-big:                  normal;
+  }
+}
+
+// Dark theme
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     // dark theme colors
+//     --color-primary:                    #{$blue};
+//     --color-secondary:                  #{$green};
+//     --color-bg-normal:                  #{$black-max};
+//     --color-bg-accent:                  var(--color-primary-darkest);
+//     --color-ink-normal:                 #{$white-max};
+//     --color-ink-muted:                  #{$white-2};
+//   }
+
+//   // Or use filter for minimum viable dark mode. hue-rotate is optional
+//   filter: invert(90%) hue-rotate(25deg);
+
+//   img, video, iframe {
+//     filter: invert(100%) hue-rotate(-25deg);
+//   }
+// #endregion
