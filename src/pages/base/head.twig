@@ -3,7 +3,7 @@
   <title>{{ post.title }}</title>
   <meta name="description" content="{{ post.description }}">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="{{ site.url }}/{% if site.base %}{{ site.base }}{% endif %}{{ post.link }}">
+  <meta property="og:url" content="{% if site.base %}{{ site.url }}/{{ site.base }}{% endif %}{{ post.link }}">
   <meta property="og:title" content="{{ post.title }}">
   <meta property="og:description" content="{{ post.description }}">
   <meta property="og:image" content="{{ post.image }}">
