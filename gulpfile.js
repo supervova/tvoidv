@@ -71,6 +71,7 @@ const paths = {
         `!${config.src}/base/content/content.js`,
         `!${config.src}/base/form/form.js`,
         `!${config.src}/components/navbar/navbar.js`,
+        `!${config.src}/js/new.js`,
         `!${config.src}/js/alt.js`,
         `!${config.src}/util/*.js`,
         `!${config.src}/js/vendor/*.js`,
@@ -141,7 +142,8 @@ const settings = {
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS     = require('gulp-clean-css');
 const sass         = require('gulp-sass');
-const unCSS        = require('gulp-uncss');
+const postcss = require('gulp-postcss');
+const uncss = require('postcss-uncss');
 
 // COMMON STYLES FUNCTION
 const cssTasks = (src, subtitle, uncssHTML, dest, link = true) => gulp.src(src)
@@ -158,17 +160,31 @@ const cssTasks = (src, subtitle, uncssHTML, dest, link = true) => gulp.src(src)
   .pipe(
     gulpif(
       PRODUCTION,
-      gulpif(link, unCSS({
+      gulpif(
+        link,
+        postcss([
+          uncss({
+            html: uncssHTML,
+            ignore: [
+              /* eslint-disable max-len */
+              // Bootstrap
+              /\w\.fade/,
+              /\.collapse?(ing)?/,
 
-        // In case of an error, try to add the array brackets
-        html: uncssHTML,
-
-        // CSS Selectors for UnCSS to ignore
-        ignore: settings.css.uncss.ignore,
-      })),
-    ),
+              // Custom
+              /\.vk/,
+              /iframe/,
+              /\.[hs]laquo-[a-z0-9]+/,
+              /\.[mp][tb]-(((sm|md|mdl|lg|xl|xxl)-)*?)[0-9s]+/,
+              /\.mx-(.*?)auto+/,
+              /* eslint-enable max-len */
+            ],
+          }),
+        ])
+      )
+    )
   )
-  .pipe(gulpif(PRODUCTION, cleanCSS({ level: { 1: { specialComments: 0 } } })))
+  .pipe(gulpif(PRODUCTION, cleanCSS()))
   .pipe(size({ title: `styles: ${subtitle}` }))
   .pipe(gulp.dest(dest))
   .pipe(browserSync.stream());
@@ -287,7 +303,6 @@ const sprite = gulp.series(
   gulp.parallel(cssMain, imgGraphics),
 );
 // #endregion
-
 
 /**
  * -----------------------------------------------------------------------------
